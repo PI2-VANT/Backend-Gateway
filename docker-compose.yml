@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  backend_gateway:
+    build: .
+    container_name: backend_gateway
+    ports:
+      - ${PORT}:${PORT}
+    env_file: .env
+    volumes:
+      - ./:/code
+
