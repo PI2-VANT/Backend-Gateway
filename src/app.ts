@@ -1,8 +1,9 @@
-import express from "express";
-import dotenv from "dotenv";
+import express from 'express';
+import dotenv from 'dotenv';
 import helmet from 'helmet';
 import httpProxy from 'express-http-proxy';
 import morgan from 'morgan';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -10,13 +11,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 function selectProxyHost(req) {
-  if (req.path.startsWith('/vant'))
-    return 'http://backend_vant:8081';
-  else if (req.path.startsWith('/users'))
-    return 'http://backend_user:8083';
+  if (req.path.startsWith('/vant')) return 'http://backend_vant:8081';
+  else if (req.path.startsWith('/users')) return 'http://backend_user:8083';
   else if (req.path.startsWith('/monitoring'))
     return 'http://backend_monitoring:8082:8083';
 }
+
+app.use(cors());
 
 app.use((req, res, next) => httpProxy(selectProxyHost(req))(req, res, next));
 
