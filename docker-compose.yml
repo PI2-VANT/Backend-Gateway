@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.5'
 
 services:
   backend_gateway:
@@ -7,6 +7,12 @@ services:
     ports:
       - ${PORT}:${PORT}
     env_file: .env
+    networks:
+      - vant-network
     volumes:
       - ./:/code
 
+networks:
+  vant-network:
+    name: vant-network
+    driver: bridge
