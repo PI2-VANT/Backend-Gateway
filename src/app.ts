@@ -14,7 +14,7 @@ function selectProxyHost(req) {
   if (req.path.startsWith('/vant')) return 'http://backend_vant:8081';
   else if (req.path.startsWith('/users')) return 'http://backend_user:8083';
   else if (req.path.startsWith('/monitoring'))
-    return 'http://backend_monitoring:8082:8083';
+    return 'http://backend_monitoring:8082';
 }
 
 app.use(cors());
